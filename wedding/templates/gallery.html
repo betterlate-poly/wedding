@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}Memories{% endblock %}
+
+{% block extra_head %}
+<style>
+  .gallery-toolbar { display:flex; align-items:center; justify-content:space-between; padding:12px 20px; gap:12px; flex-wrap:wrap; }
+  .gallery-toolbar .left { display:flex; gap:10px; align-items:center; }
+  .filter-btn { background:none; border:1px solid var(--gold-light); color:var(--gold); padding:6px 14px; border-radius:20px; font-family:var(--font-body); font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; transition:all .2s; }
+  .filter-btn.active, .filter-btn:hover { background:var(--gold); color:#fff; border-color:var(--gold); }
+  .slideshow-btn { background:none; border:1px solid var(--cream-dark); color:var(--text-muted); padding:6px 14px; border-radius:20px; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; transition:all .2s; }
+  .slideshow-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+  /* Lightbox action bar */
+  .lb-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .lb-actions a, .lb-actions button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: .8rem;
+    font-family: var(--font-body);
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .2s;
+    text-decoration: none;
+  }
+  .lb-btn-download {
+    background: none;
+    border: 1px solid rgba(255,255,255,.35);
+    color: rgba(255,255,255,.85);
+  }
+  .lb-btn-download:hover { border-color: #fff; color: #fff; }
+  .lb-btn-delete {
+    background: none;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+  }
+  .lb-btn-delete:hover { background: #e74c3c; color: #fff; }
+  .lb-info {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    font-size: .73rem;
+    color: rgba(255,255,255,.45);
+    justify-content: center;
+  }
+</style>
+{% endblock %}
+
+{% block nav %}
+<nav class="top-nav">
+  <a href="/" class="nav-logo">Z & M</a>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <span id="mediaCount" class="nav-count"></span>
+    <a href="/gallery/logout" class="nav-back" style="font-size:.75rem">🔒 Lock</a>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="page-header" style="padding-bottom:0">
+  <h2 class="page-title">Our Memories</h2>
+  <p class="page-sub">Zuka & Mike ✦ Wedding Gallery</p>
+</div>
+
+<div class="gallery-toolbar">
+  <div class="left">
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">All</button>
+    <button class="filter-btn" data-filter="image" onclick="setFilter('image',this)">Photos</button>
+    <button class="filter-btn" data-filter="video" onclick="setFilter('video',this)">Videos</button>
+  </div>
+  <button class="slideshow-btn" onclick="startSlideshow()">▶ Slideshow</button>
+</div>
+
+<div class="gallery-grid" id="galleryGrid">
+  <div class="gallery-loading" id="galleryLoading">
+    <div class="loading-ring"></div>
+    <p>Loading memories…</p>
+  </div>
+</div>
+
+<div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+  <button class="btn-outline" onclick="loadMore()">Load more</button>
+</div>
+
+<p class="gallery-empty" id="galleryEmpty" style="display:none">
+  No memories yet — be the first to upload!
+</p>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" style="display:none" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-prev" onclick="lbNav(-1)">‹</button>
+  <button class="lb-next" onclick="lbNav(1)">›</button>
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <img id="lbImg" style="display:none"/>
+    <video id="lbVideo" controls style="display:none"></video>
+    <div class="lb-info">
+      <span id="lbDate"></span>
+      <span id="lbSize"></span>
+    </div>
+    <div class="lb-actions">
+      <a id="lbDownload" href="#" download class="lb-btn-download">⤓ Download</a>
+      <button id="lbDelete" class="lb-btn-delete" onclick="event.stopPropagation();deleteCurrentItem()">🗑 Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Slideshow -->
+<div class="slideshow" id="slideshow" style="display:none">
+  <button class="ss-close" onclick="stopSlideshow()">✕ Exit</button>
+  <img id="ssImg" src="" alt=""/>
+  <div class="ss-progress" id="ssProgress"></div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/gallery.js"></script>
+{% endblock %}
