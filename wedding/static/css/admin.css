@@ -1,0 +1,158 @@
+/* Admin Dashboard Styles */
+:root {
+  --admin-bg:     #f5f4f1;
+  --admin-card:   #ffffff;
+  --admin-border: #e8e4dc;
+  --admin-text:   #2a2118;
+  --admin-muted:  #7a7060;
+}
+
+.admin-body { background: var(--admin-bg); }
+
+.admin-header {
+  background: var(--admin-card);
+  border-bottom: 1px solid var(--admin-border);
+  padding: 16px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.admin-logo {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--gold);
+  letter-spacing: .12em;
+}
+.admin-logout {
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--admin-muted);
+  transition: color var(--transition);
+}
+.admin-logout:hover { color: #c0392b; }
+
+.admin-container { max-width: 1200px; margin: 0 auto; padding: 28px 20px 60px; }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+@media (min-width: 640px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.stat-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--admin-muted);
+  margin-top: 6px;
+}
+
+.admin-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.admin-card-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--admin-border);
+  display: flex; align-items: center; gap: 12px;
+}
+.admin-card-header h2 { font-family: var(--font-serif); font-weight: 500; font-size: 1.2rem; }
+.badge {
+  background: var(--gold-pale);
+  color: var(--gold);
+  border-radius: 50px;
+  padding: 3px 10px;
+  font-size: .72rem;
+  letter-spacing: .08em;
+}
+
+.admin-table-wrap { overflow-x: auto; }
+.admin-table {
+  width: 100%; border-collapse: collapse;
+  font-size: .84rem;
+}
+.admin-table th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--admin-muted);
+  border-bottom: 1px solid var(--admin-border);
+  font-weight: 400;
+  white-space: nowrap;
+}
+.admin-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--admin-border);
+  vertical-align: middle;
+}
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table tr:hover td { background: var(--admin-bg); }
+
+.thumb {
+  width: 48px; height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+.video-thumb {
+  width: 48px; height: 48px;
+  background: var(--champagne);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.filename-cell {
+  max-width: 200px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-family: monospace; font-size: .78rem; color: var(--admin-muted);
+}
+.time-cell { font-size: .78rem; color: var(--admin-muted); white-space: nowrap; }
+
+.type-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.type-badge.image { background: #e8f4e8; color: #3a7a3a; }
+.type-badge.video { background: #e8eef8; color: #2a4a8a; }
+
+.action-btns { display: flex; gap: 8px; }
+.action-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: .74rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border: 1px solid;
+  cursor: pointer;
+  font-family: var(--font-body);
+  text-decoration: none;
+  display: inline-flex; align-items: center;
+  transition: all var(--transition);
+}
+.action-btn.view { color: var(--gold); border-color: var(--gold-light); background: var(--gold-pale); }
+.action-btn.view:hover { background: var(--gold); color: #fff; }
+.action-btn.delete { color: #c0392b; border-color: #f0c0c0; background: #fdf0f0; }
+.action-btn.delete:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+
+.admin-empty { padding: 40px; text-align: center; color: var(--admin-muted); }
+
+.admin-footer { display: flex; gap: 12px; justify-content: flex-start; }

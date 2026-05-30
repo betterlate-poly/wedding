@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login ✦ Zuka & Mike</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/main.css"/>
+</head>
+<body>
+<div class="grain-overlay"></div>
+<div class="lock-wrap">
+  <div class="lock-card">
+    <div class="lock-ornament">⚙</div>
+    <h2 class="lock-title">Admin Access</h2>
+    <p class="lock-sub">Zuka & Mike Wedding Dashboard</p>
+    {% if error %}<div class="lock-error">{{ error }}</div>{% endif %}
+    <form method="POST" action="/admin/login" class="lock-form">
+      <input type="password" name="password" class="code-input" placeholder="Admin password" autofocus/>
+      <button type="submit" class="btn-gold full-width">Enter Dashboard</button>
+    </form>
+    <a href="/" class="lock-hint" style="display:block;text-align:center;margin-top:16px">← Back to wedding</a>
+  </div>
+</div>
+</body>
+</html>

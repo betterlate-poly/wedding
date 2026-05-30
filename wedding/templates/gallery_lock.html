@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}View Memories{% endblock %}
+
+{% block content %}
+<div class="lock-wrap">
+  <div class="lock-card">
+    <div class="lock-ornament">✦</div>
+    <h2 class="lock-title">View Memories</h2>
+    <p class="lock-sub">Enter the gallery code to view<br/>Zuka & Mike's wedding photos</p>
+
+    {% if error %}
+    <div class="lock-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/gallery/auth" class="lock-form">
+      <div class="code-inputs">
+        <input type="text" name="code" id="codeInput"
+               class="code-input"
+               maxlength="10"
+               placeholder="Access code"
+               autocomplete="off"
+               autofocus/>
+      </div>
+      <button type="submit" class="btn-gold full-width">
+        Enter Gallery ✦
+      </button>
+    </form>
+
+    <p class="lock-hint">Ask the couple for the access code</p>
+  </div>
+</div>
+{% endblock %}
